@@ -2342,17 +2342,18 @@ public final class ProxyRepositoryFactory implements IProxyRepositoryFactory {
         return null;
     }
 
-    private Project getProjectFromItemId(String itemId) {
+    public Project getProjectFromItemId(String itemId) {
+        Project project = null;
         String projectLabel = getProjectLabelFromItemId(itemId);
         if (projectLabel != null && !projectLabel.trim().isEmpty()) {
-            Project project = projectManager.getProjectFromProjectLabel(projectLabel);
+            project = projectManager.getProjectFromProjectLabel(projectLabel);
             if (project == null) {
                 org.talend.commons.exception.ExceptionHandler.process(
                         new Exception("Can't get project object of [" + projectLabel + "], will use current project"), //$NON-NLS-1$//$NON-NLS-2$
                         Priority.WARN);
             }
         }
-        return null;
+        return project;
     }
 
     /**
